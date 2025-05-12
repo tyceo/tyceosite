@@ -1,0 +1,83 @@
+﻿// PortfolioPage.tsx
+import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Mail, Github } from "lucide-react";
+import { motion } from "framer-motion";
+
+const projects = [
+  {
+    title: "Student Project 1",
+    image: "/images/project1.jpg",
+    video: "https://www.youtube.com/embed/yourvideoID1",
+  },
+  {
+    title: "Student Project 2",
+    image: "/images/project2.jpg",
+    video: "https://www.youtube.com/embed/yourvideoID2",
+  },
+];
+
+export default function PortfolioPage() {
+  return (
+<div className="bg-gray-900 text-white min-h-screen">
+    {/* Hero */}
+    <section className="text-center py-16 px-4">
+        <motion.h1 className="text-4xl font-bold mb-4"
+                   initial={{ opacity: 0, y: -20 }}
+                   animate={{ opacity: 1, y: 0 }}>
+            Hey, I'm a Game Dev Student 🚀
+        </motion.h1>
+        <p className="text-gray-400 max-w-xl mx-auto">
+            Welcome to my portfolio! Here you'll find my student projects,
+            gameplay trailers, and how to get in touch.
+        </p>
+    </section>
+
+    {/* Projects */}
+    <section className="px-4 py-10 grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        {projects.map((proj, i) => (
+        <Card key={i} className="bg-gray-800">
+            <CardContent className="p-4">
+                <h2 className="text-xl font-semibold mb-2">{proj.title}</h2>
+                <img src={proj.image}
+                     alt={proj.title}
+                     className="rounded-xl w-full mb-4" />
+                <div className="aspect-video mb-4">
+                    <iframe src={proj.video}
+                            title={`Trailer for ${proj.title}`}
+                            className="w-full h-full rounded-xl"
+                            allowFullScreen />
+                </div>
+            </CardContent>
+        </Card>
+        ))}
+    </section>
+
+    {/* GitHub & Contact */}
+    <section className="text-center py-16 px-4 bg-gray-800">
+        <h2 className="text-2xl font-bold mb-4">Connect With Me</h2>
+        <div className="flex justify-center gap-4 mb-6">
+            <Button asChild variant="outline">
+                <a href="https://github.com/yourusername"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   className="flex items-center gap-2">
+                    <Github className="w-5 h-5" />
+                    GitHub
+                </a>
+            </Button>
+            <Button asChild>
+                <a href="mailto:youremail@example.com" className="flex items-center gap-2">
+                    <Mail className="w-5 h-5" />
+                    Email Me
+                </a>
+            </Button>
+        </div>
+        <p className="text-gray-400">
+            Made with 💙 using React & Tailwind CSS
+        </p>
+    </section>
+</div>
+  );
+}
