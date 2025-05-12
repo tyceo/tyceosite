@@ -1,83 +1,76 @@
-﻿// PortfolioPage.tsx
-import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Mail, Github } from "lucide-react";
-import { motion } from "framer-motion";
-
-const projects = [
-  {
-    title: "Student Project 1",
-    image: "/images/project1.jpg",
-    video: "https://www.youtube.com/embed/yourvideoID1",
-  },
-  {
-    title: "Student Project 2",
-    image: "/images/project2.jpg",
-    video: "https://www.youtube.com/embed/yourvideoID2",
-  },
-];
-
-export default function PortfolioPage() {
-  return (
-<div className="bg-gray-900 text-white min-h-screen">
-    {/* Hero */}
-    <section className="text-center py-16 px-4">
-        <motion.h1 className="text-4xl font-bold mb-4"
-                   initial={{ opacity: 0, y: -20 }}
-                   animate={{ opacity: 1, y: 0 }}>
-            Hey, I'm a Game Dev Student 🚀
-        </motion.h1>
-        <p className="text-gray-400 max-w-xl mx-auto">
-            Welcome to my portfolio! Here you'll find my student projects,
-            gameplay trailers, and how to get in touch.
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game Dev Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Hero Section -->
+    <section class="text-center py-16 px-4">
+        <h1 class="text-4xl font-bold mb-4">Hi, I'm a Game Dev Student 🎮</h1>
+        <p class="text-gray-400 max-w-xl mx-auto">
+            Welcome to my portfolio! Here you can find my student projects, game trailers, and ways to connect.
         </p>
     </section>
 
-    {/* Projects */}
-    <section className="px-4 py-10 grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-        {projects.map((proj, i) => (
-        <Card key={i} className="bg-gray-800">
-            <CardContent className="p-4">
-                <h2 className="text-xl font-semibold mb-2">{proj.title}</h2>
-                <img src={proj.image}
-                     alt={proj.title}
-                     className="rounded-xl w-full mb-4" />
-                <div className="aspect-video mb-4">
-                    <iframe src={proj.video}
-                            title={`Trailer for ${proj.title}`}
-                            className="w-full h-full rounded-xl"
-                            allowFullScreen />
-                </div>
-            </CardContent>
-        </Card>
-        ))}
-    </section>
-
-    {/* GitHub & Contact */}
-    <section className="text-center py-16 px-4 bg-gray-800">
-        <h2 className="text-2xl font-bold mb-4">Connect With Me</h2>
-        <div className="flex justify-center gap-4 mb-6">
-            <Button asChild variant="outline">
-                <a href="https://github.com/yourusername"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   className="flex items-center gap-2">
-                    <Github className="w-5 h-5" />
-                    GitHub
-                </a>
-            </Button>
-            <Button asChild>
-                <a href="mailto:youremail@example.com" className="flex items-center gap-2">
-                    <Mail className="w-5 h-5" />
-                    Email Me
-                </a>
-            </Button>
+    <!-- Projects Section -->
+    <section class="px-4 py-10 grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <!-- Project 1 -->
+        <div class="bg-gray-800 rounded-xl p-4">
+            <h2 class="text-xl font-semibold mb-2">Student Project 1</h2>
+            <img src="images/project1.jpg"
+                 alt="Project 1"
+                 class="rounded-xl w-full mb-4" />
+            <div class="aspect-video mb-4">
+                <iframe class="w-full h-64 rounded-xl"
+                        src="https://www.youtube.com/embed/yourvideoID1"
+                        title="Project 1 Trailer"
+                        frameborder="0"
+                        allowfullscreen></iframe>
+            </div>
         </div>
-        <p className="text-gray-400">
-            Made with 💙 using React & Tailwind CSS
-        </p>
+
+        <!-- Project 2 -->
+        <div class="bg-gray-800 rounded-xl p-4">
+            <h2 class="text-xl font-semibold mb-2">Student Project 2</h2>
+            <img src="images/project2.jpg"
+                 alt="Project 2"
+                 class="rounded-xl w-full mb-4" />
+            <div class="aspect-video mb-4">
+                <iframe class="w-full h-64 rounded-xl"
+                        src="https://www.youtube.com/embed/yourvideoID2"
+                        title="Project 2 Trailer"
+                        frameborder="0"
+                        allowfullscreen></iframe>
+            </div>
+        </div>
     </section>
-</div>
-  );
-}
+
+    <!-- Contact & GitHub -->
+    <section class="text-center py-16 px-4 bg-gray-800">
+        <h2 class="text-2xl font-bold mb-4">Get in Touch</h2>
+        <div class="flex justify-center gap-6 mb-6">
+            <a href="https://github.com/yourusername"
+               target="_blank"
+               class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-2 rounded-xl inline-flex items-center gap-2">
+                <svg class="w-5 h-5"
+                     fill="currentColor"
+                     viewBox="0 0 24 24"
+                     aria-hidden="true">
+                    <path fill-rule="evenodd"
+                          d="M12 0C5.37 0 0 5.37 0 12a12 12 0 008.21 11.45c.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.38-1.35-1.75-1.35-1.75-1.1-.75.08-.73.08-.73 1.22.09 1.86 1.26 1.86 1.26 1.08 1.85 2.82 1.31 3.51 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 016 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"
+                          clip-rule="evenodd" />
+                </svg>
+                GitHub
+            </a>
+            <a href="mailto:youremail@example.com"
+               class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-xl inline-flex items-center gap-2">
+                📧 Email Me
+            </a>
+        </div>
+        <p class="text-gray-400">Made with ❤️ using HTML & Tailwind CSS</p>
+    </section>
+</body>
+</html>
