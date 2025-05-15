@@ -84,47 +84,45 @@
            class="inline-block bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-lg">View on Google Play</a>
     </section>
 
-    <!-- Slideshow of Other Work -->
+    <!-- Slideshow of Other Work (Manual with Arrows) -->
     <section class="px-6 py-14 max-w-5xl mx-auto text-center">
-        <h3 class="text-2xl font-semibold mb-6">Other Work</h3>
-        <div class="relative w-full max-w-3xl mx-auto h-64 rounded-xl overflow-hidden">
+        <h3 class="text-2xl font-semibold mb-6">🖼️ Other Work</h3>
 
-            <!-- Slideshow Images -->
-            <div class="absolute inset-0 fade" style="animation-delay: 0s">
-                <img src="Slide1.png" alt="Slide 1" class="w-full h-full object-cover" />
+        <div class="relative w-full max-w-3xl mx-auto h-64 rounded-xl overflow-hidden">
+            <!-- Slides -->
+            <div class="w-full h-full">
+                <img id="slideshow-image"
+                     src="Slide1.png"
+                     alt="Slide"
+                     class="w-full h-full object-cover rounded-xl transition-opacity duration-500" />
             </div>
-            <div class="absolute inset-0 fade" style="animation-delay: 2s">
-                <img src="Slide2.png" alt="Slide 2" class="w-full h-full object-cover" />
-            </div>
-            <div class="absolute inset-0 fade" style="animation-delay: 4s">
-                <img src="Slide3.png" alt="Slide 3" class="w-full h-full object-cover" />
-            </div>
-            <div class="absolute inset-0 fade" style="animation-delay: 6s">
-                <img src="Slide4.png" alt="Slide 4" class="w-full h-full object-cover" />
-            </div>
-            <div class="absolute inset-0 fade" style="animation-delay: 8s">
-                <img src="Slide5.png" alt="Slide 5" class="w-full h-full object-cover" />
-            </div>
-            <div class="absolute inset-0 fade" style="animation-delay: 10s">
-                <img src="Slide6.png" alt="Slide 6" class="w-full h-full object-cover" />
-            </div>
-            <div class="absolute inset-0 fade" style="animation-delay: 12s">
-                <img src="Slide7.png" alt="Slide 7" class="w-full h-full object-cover" />
-            </div>
-            <div class="absolute inset-0 fade" style="animation-delay: 14s">
-                <img src="Slide8.png" alt="Slide 8" class="w-full h-full object-cover" />
-            </div>
-            <div class="absolute inset-0 fade" style="animation-delay: 16s">
-                <img src="Slide9.png" alt="Slide 9" class="w-full h-full object-cover" />
-            </div>
-            <div class="absolute inset-0 fade" style="animation-delay: 18s">
-                <img src="Slide10.png" alt="Slide 10" class="w-full h-full object-cover" />
-            </div>
-            <div class="absolute inset-0 fade" style="animation-delay: 20s">
-                <img src="Slide11.png" alt="Slide 11" class="w-full h-full object-cover" />
-            </div>
+
+            <!-- Left Arrow -->
+            <button onclick="changeSlide(-1)"
+                    class="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-800 bg-opacity-50 hover:bg-opacity-75 text-white px-3 py-2 rounded-r">
+                &#8592;
+            </button>
+
+            <!-- Right Arrow -->
+            <button onclick="changeSlide(1)"
+                    class="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-800 bg-opacity-50 hover:bg-opacity-75 text-white px-3 py-2 rounded-l">
+                &#8594;
+            </button>
         </div>
     </section>
+
+    <script>
+        const slideImages = [
+            "Slide1.png", "Slide2.png", "Slide3.png", "Slide4.png", "Slide5.png", "Slide6.png",
+            "Slide7.png", "Slide8.png", "Slide9.png", "Slide10.png", "Slide11.png"
+        ];
+        let currentSlide = 0;
+
+        function changeSlide(direction) {
+            currentSlide = (currentSlide + direction + slideImages.length) % slideImages.length;
+            document.getElementById("slideshow-image").src = slideImages[currentSlide];
+        }
+    </script>
 
     <!-- Footer -->
     <footer class="text-center py-10 text-gray-500 text-sm">
