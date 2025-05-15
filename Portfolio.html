@@ -86,15 +86,15 @@
 
     <!-- Slideshow of Other Work (Manual with Arrows) -->
     <section class="px-6 py-14 max-w-5xl mx-auto text-center">
-        <h3 class="text-2xl font-semibold mb-6">🖼️ Other Work</h3>
+        <h3 class="text-2xl font-semibold mb-6">Other Work</h3>
 
-        <div class="relative w-full max-w-3xl mx-auto h-64 rounded-xl overflow-hidden">
+        <div class="relative w-full max-w-3xl mx-auto h-[500px] rounded-xl overflow-hidden bg-black">
             <!-- Slides -->
-            <div class="w-full h-full">
+            <div class="w-full h-full flex items-center justify-center">
                 <img id="slideshow-image"
                      src="Slide1.png"
                      alt="Slide"
-                     class="w-full h-full object-cover rounded-xl transition-opacity duration-500" />
+                     class="max-h-full max-w-full object-contain rounded-xl transition-opacity duration-500" />
             </div>
 
             <!-- Left Arrow -->
@@ -123,6 +123,7 @@
             document.getElementById("slideshow-image").src = slideImages[currentSlide];
         }
     </script>
+
 
     <!-- Footer -->
     <footer class="text-center py-10 text-gray-500 text-sm">
