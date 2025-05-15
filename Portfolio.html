@@ -3,74 +3,100 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Game Dev Portfolio</title>
+    <title>SleightPengi Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Simple slideshow animation */
+        .fade {
+            animation: fadeEffect 8s infinite;
+        }
+
+        @keyframes fadeEffect {
+            0%, 100% {
+                opacity: 0;
+            }
+
+            10%, 40% {
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
-<body class="bg-gray-900 text-white">
-    <!-- Hero Section -->
+<body class="bg-gray-900 text-white font-sans">
+    <!-- Navbar -->
+    <header class="flex justify-between items-center px-6 py-4 bg-gray-800 shadow-md">
+        <h1 class="text-2xl font-bold">🎮 SleightPengi</h1>
+        <nav class="space-x-4">
+            <a href="mailto:youremail@example.com"
+               class="text-gray-300 hover:text-white">Contact Me</a>
+            <a href="https://github.com/yourusername"
+               target="_blank"
+               class="text-gray-300 hover:text-white">GitHub</a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
     <section class="text-center py-16 px-4">
-        <h1 class="text-4xl font-bold mb-4">Hi, I'm a Game Dev Student </h1>
-        <p class="text-gray-400 max-w-xl mx-auto">
-            Welcome to my portfolio! Here you can find my student projects, game trailers, and ways to connect.
+        <h2 class="text-4xl font-bold mb-4">Hi, I'm a Game Dev Student 🎮</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">
+            Welcome to my portfolio! Check out my published games and projects below.
         </p>
     </section>
 
-    <!-- Projects Section -->
-    <section class="px-4 py-10 grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-        <!-- Project 1 -->
-        <div class="bg-gray-800 rounded-xl p-4">
-            <h2 class="text-xl font-semibold mb-2">Student Project 1</h2>
-            <img src="images/project1.jpg"
-                 alt="Project 1"
-                 class="rounded-xl w-full mb-4" />
-            <div class="aspect-video mb-4">
-                <iframe class="w-full h-64 rounded-xl"
-                        src="https://www.youtube.com/embed/yourvideoID1"
-                        title="Project 1 Trailer"
-                        frameborder="0"
-                        allowfullscreen></iframe>
-            </div>
-        </div>
-
-        <!-- Project 2 -->
-        <div class="bg-gray-800 rounded-xl p-4">
-            <h2 class="text-xl font-semibold mb-2">Student Project 2</h2>
-            <img src="test.png"
-                 alt="Project 2"
-                 class="rounded-xl w-full mb-4" />
-            <div class="aspect-video mb-4">
-                <iframe class="w-full h-64 rounded-xl"
-                        src="https://www.youtube.com/embed/yourvideoID2"
-                        title="Project 2 Trailer"
-                        frameborder="0"
-                        allowfullscreen></iframe>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact & GitHub -->
-    <section class="text-center py-16 px-4 bg-gray-800">
-        <h2 class="text-2xl font-bold mb-4">Get in Touch</h2>
-        <div class="flex justify-center gap-6 mb-6">
-            <a href="https://github.com/yourusername"
+    <!-- Itch.io Game -->
+    <section class="px-6 py-10 max-w-5xl mx-auto">
+        <h3 class="text-2xl font-semibold mb-4">🧑‍🚀 Return the Astronaut (Itch.io)</h3>
+        <a href="https://sleightpengi.itch.io/return-the-astronaut"
+           target="_blank"
+           class="block mb-4">
+            <img src="images/return.jpg"
+                 alt="Return the Astronaut"
+                 class="w-full rounded-xl shadow-md" />
+        </a>
+        <p class="text-gray-400">
+            A solo student game project exploring puzzle mechanics and narrative
+            discovery. Click the image or
+            <a href="https://sleightpengi.itch.io/return-the-astronaut"
                target="_blank"
-               class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-2 rounded-xl inline-flex items-center gap-2">
-                <svg class="w-5 h-5"
-                     fill="currentColor"
-                     viewBox="0 0 24 24"
-                     aria-hidden="true">
-                    <path fill-rule="evenodd"
-                          d="M12 0C5.37 0 0 5.37 0 12a12 12 0 008.21 11.45c.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.38-1.35-1.75-1.35-1.75-1.1-.75.08-.73.08-.73 1.22.09 1.86 1.26 1.86 1.26 1.08 1.85 2.82 1.31 3.51 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 016 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"
-                          clip-rule="evenodd" />
-                </svg>
-                GitHub
-            </a>
-            <a href="mailto:youremail@example.com"
-               class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-xl inline-flex items-center gap-2">
-                📧 Email Me
-            </a>
-        </div>
-        
+               class="underline text-blue-400">visit on Itch.io</a>.
+        </p>
     </section>
+
+    <!-- Published App -->
+    <section class="px-6 py-10 max-w-5xl mx-auto bg-gray-800 rounded-xl">
+        <h3 class="text-2xl font-semibold mb-4">📱 Published App: Float Voyage</h3>
+        <p class="text-gray-400 mb-4">
+            Explore the calming journey of a balloon navigating wind currents.
+        </p>
+        <a href="https://play.google.com/store/apps/details?id=com.FloatVoyagers.FloatVoyage"
+           target="_blank"
+           class="inline-block bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-lg">View on Google Play</a>
+    </section>
+
+    <!-- Slideshow of Other Work -->
+    <section class="px-6 py-14 max-w-5xl mx-auto text-center">
+        <h3 class="text-2xl font-semibold mb-6">🖼️ Other Work</h3>
+        <div class="relative w-full max-w-3xl mx-auto h-64 rounded-xl overflow-hidden">
+            <div class="absolute inset-0 fade">
+                <img src="images/slide1.jpg"
+                     alt="Work 1"
+                     class="w-full h-full object-cover" />
+            </div>
+            <div class="absolute inset-0 fade" style="animation-delay: 2s">
+                <img src="images/slide2.jpg"
+                     alt="Work 2"
+                     class="w-full h-full object-cover" />
+            </div>
+            <div class="absolute inset-0 fade" style="animation-delay: 4s">
+                <img src="images/slide3.jpg"
+                     alt="Work 3"
+                     class="w-full h-full object-cover" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center py-10 text-gray-500 text-sm">
+    </footer>
 </body>
 </html>
