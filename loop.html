@@ -6,37 +6,31 @@
     <title>Looping Torus</title>
     <style>
         html, body { height: 100%; margin: 0; }
-        body { background: radial-gradient(1200px 600px at 50% 30%, #10131a 0%, #07090d 60%, #040507 100%); }
+        body { background: #111; }
         canvas { display: block; width: 100%; height: 100%; }
-        .label {
-            position: fixed; inset: 16px auto auto 16px; color: #e6edf3; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-            font-size: 14px; opacity: .9; letter-spacing: .2px; user-select: none;
-            background: rgba(0,0,0,.35); padding: 8px 10px; border-radius: 10px; backdrop-filter: blur(4px);
-        }
-        .label a { color: #9dc1ff; text-decoration: none; }
     </style>
 </head>
 <body>
-<div class="label">Looping Torus • drag to orbit • scroll to zoom</div>
 <canvas id="c"></canvas>
 
-<script type="module">
-    import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
-    import { OrbitControls } from 'https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+<!-- Three.js core -->
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<!-- OrbitControls -->
+<script src="https://unpkg.com/three@0.160.0/examples/js/controls/OrbitControls.js"></script>
 
+<script>
     const canvas = document.getElementById('c');
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
     renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x0a0d14, 0.18);
+    scene.background = new THREE.Color(0x111111);
 
     const camera = new THREE.PerspectiveCamera(60, 2, 0.1, 100);
     camera.position.set(0, 0.4, 4);
 
-    const controls = new OrbitControls(camera, renderer.domElement);
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-    controls.dampingFactor = 0.06;
 
     // Lights
     const hemi = new THREE.HemisphereLight(0xb0c7ff, 0x0b0d13, 1.0);
@@ -50,65 +44,31 @@
     const torusMat = new THREE.MeshStandardMaterial({
         color: 0x2f86ff,
         metalness: 0.45,
-        roughness: 0.25,
-        envMapIntensity: 1.0
+        roughness: 0.25
     });
     const torus = new THREE.Mesh(torusGeo, torusMat);
     scene.add(torus);
 
-    // Subtle floating point lights for sparkle
-    const pointA = new THREE.PointLight(0x88aaff, 1.2, 6);
-    pointA.position.set(1.8, 0.6, 1.2);
-    scene.add(pointA);
-    const pointB = new THREE.PointLight(0xffe0a0, 0.8, 6);
-    pointB.position.set(-1.2, -0.8, -1.6);
-    scene.add(pointB);
-
-    // Handle resize
-    function resizeRendererToDisplaySize() {
-        const { clientWidth, clientHeight } = renderer.domElement;
-        const needResize = renderer.domElement.width !== clientWidth * devicePixelRatio ||
-            renderer.domElement.height !== clientHeight * devicePixelRatio;
-        if (needResize) {
-            renderer.setSize(clientWidth, clientHeight, false);
-        }
-        camera.aspect = clientWidth / clientHeight;
+    function resize() {
+        const w = canvas.clientWidth;
+        const h = canvas.clientHeight;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
         camera.updateProjectionMatrix();
     }
 
-    // Animation loop
-    let start = performance.now();
-    function render(now) {
-        const t = (now - start) / 1000; // seconds
+    function animate(time) {
+        time *= 0.001; // convert to seconds
 
-        // Looping motion: rotate and gently pulse the minor radius (like breathing)
-        torus.rotation.x = t * 0.6;
-        torus.rotation.y = t * 0.8;
+        torus.rotation.x = time * 0.6;
+        torus.rotation.y = time * 0.8;
 
-        // Subtle scale pulse to suggest an endless loop
-        const s = 1 + Math.sin(t * 2.0) * 0.03;
-        torus.scale.set(s, s, s);
-
-        // Move lights a bit for shimmer
-        pointA.position.x = Math.cos(t * 0.9) * 1.8;
-        pointA.position.z = Math.sin(t * 0.9) * 1.8;
-        pointB.position.x = Math.sin(t * 0.7) * -1.6;
-        pointB.position.y = Math.cos(t * 0.7) * -0.8;
-
+        resize();
         controls.update();
-        resizeRendererToDisplaySize();
         renderer.render(scene, camera);
-        requestAnimationFrame(render);
+        requestAnimationFrame(animate);
     }
-
-    // Kick off
-    resizeRendererToDisplaySize();
-    renderer.setAnimationLoop(render);
-
-    // Fallback for no WebGL
-    if (!renderer.capabilities.isWebGL2) {
-        console.warn('WebGL2 not available; falling back to WebGL1 if possible.');
-    }
+    requestAnimationFrame(animate);
 </script>
 </body>
 </html>
