@@ -4,129 +4,586 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thomas Smith Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Simple slideshow animation */
-        .fade {
-            animation: fadeEffect 3s infinite;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        @keyframes fadeEffect {
-            0%, 100% {
-                opacity: 0;
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            background-color: #2a2a2a;
+        }
+
+        /* Navbar */
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            background-color: rgba(26, 26, 26, 0.8);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 32px;
+            font-weight: 500;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 400;
+        }
+
+        nav a:hover {
+            opacity: 0.7;
+        }
+
+        /* Hero Section with Video */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero h2 {
+            font-size: 54px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            font-weight: 300;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .hero-links {
+            margin-top: 30px;
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .hero-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 400;
+            padding: 10px 20px;
+            border: 2px solid white;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .hero-links a:hover {
+            background-color: white;
+            color: #2a2a2a;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 80px 50px;
+            background-color: #2a2a2a;
+        }
+
+        .portfolio h3 {
+            font-size: 36px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .portfolio-divider {
+            width: 100%;
+            max-width: 1400px;
+            height: 2px;
+            background-color: white;
+            margin: 0 auto 20px auto;
+        }
+
+        .portfolio-row {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 50px;
+            max-width: 1400px;
+            margin: 0 auto 80px auto;
+        }
+
+        .project-item {
+            width: 100%;
+            grid-column: span 2;
+        }
+
+        .project-item.wide {
+            grid-column: span 4;
+        }
+
+        .project-item.narrow {
+            grid-column: span 1;
+        }
+
+        .project-image-container {
+            position: relative;
+            height: 400px;
+            margin-bottom: 30px;
+        }
+
+        .project-placeholder {
+            height: 400px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #3a3a3a;
+            border-radius: 8px;
+        }
+
+        .project-placeholder h4 {
+            font-size: 32px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .project-image-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .project-image-container img.active {
+            opacity: 1;
+        }
+
+        .project-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 5;
+        }
+
+        .project-nav button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid white;
+            background-color: transparent;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .project-nav button.active {
+            background-color: white;
+        }
+
+        .project-info {
+            text-align: left;
+        }
+
+        .project-info h4 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: px;
+        }
+
+        .project-info p {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.8;
+            margin-bottom: 0px;
+        }
+
+        .project-link {
+            display: none;
+        }
+
+        .project-link:hover {
+            opacity: 0.8;
+        }
+
+        /* About Me Section */
+        .about {
+            background-color: white;
+            color: #333;
+            padding: 80px 50px;
+        }
+
+        .about-container {
+            display: flex;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 60px;
+        }
+
+        .about-image {
+            flex: 0 0 300px;
+        }
+
+        .about-image img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .about-content {
+            flex: 1;
+            font-family: Montserrat, sans-serif;
+        }
+
+        .about-content h3 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .about-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        .about-buttons {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .about-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #2a2a2a;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            transition: opacity 0.3s;
+            border: 2px solid #2a2a2a;
+        }
+
+        .about-button:hover {
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            text-align: center;
+            padding: 30px;
+            color: #888;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 32px;
             }
 
-            10%, 40% {
-                opacity: 1;
+            .portfolio-row {
+                grid-template-columns: 1fr;
+            }
+
+            .project-image-container {
+                height: 300px;
+            }
+
+            .about-container {
+                flex-direction: column;
+            }
+
+            .about-image {
+                flex: 0 0 auto;
+            }
+
+            header {
+                padding: 20px;
+            }
+
+            nav a {
+                margin-left: 15px;
             }
         }
     </style>
 </head>
-<body class="bg-gray-900 text-white font-sans">
-    <!-- Navbar -->
-    <header class="flex justify-between items-center px-6 py-4 bg-gray-800 shadow-md">
-        <h1 class="text-2xl font-bold">Thomas Smith</h1>
-        <nav class="space-x-4">
-            <a href="mailto:tyceo87@gmail.com"
-               class="text-gray-300 hover:text-white">Contact Me</a>
-            <a href="https://github.com/tyceo"
-               target="_blank"
-               class="text-gray-300 hover:text-white">GitHub</a>
-        </nav>
-    </header>
+<body>
+<!-- Navbar -->
+<header>
+    <h1>Thomas Smith</h1>
+    <nav>
+        <a href="mailto:tyceogames@gmail.com">Contact Me</a>
+        <a href="https://github.com/tyceo" target="_blank">GitHub</a>
+    </nav>
+</header>
 
-    <!-- Hero -->
-    <section class="text-center py-16 px-4">
-        <h2 class="text-4xl font-bold mb-4">Hi, I'm a Game Dev Student</h2>
-        <p class="text-gray-400 max-w-2xl mx-auto">
-            This is my portfolio! Check out my published games and projects below. I am a game developer with a focus on programming.
+<!-- Hero with Video Background -->
+<section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline>
+        <source src="PoolVideo.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h2>Unity Game Developer</h2>
+        <p>
+            Passionate Programmer with a focus on Networking and XR/VR Systems
         </p>
-    </section>
-
-    <!-- Itch.io Game -->
-    <section class="px-6 py-10 max-w-5xl mx-auto">
-        <h3 class="text-2xl font-semibold mb-4"> Return the Astronaut (Itch.io)</h3>
-        <a href="https://sleightpengi.itch.io/return-the-astronaut"
-           target="_blank"
-           class="block mb-4">
-            <img src="Return.png"
-                 alt="Return the Astronaut"
-                 class="w-full rounded-xl shadow-md" />
-        </a>
-        <p class="text-gray-400">
-            A game made with the help of Shell and Lachlan.  Click the image or
-            <a href="https://sleightpengi.itch.io/return-the-astronaut"
-               target="_blank"
-               class="underline text-blue-400">visit on Itch.io</a>.
-        </p>
-    </section>
-
-    <!-- Published App -->
-    <section class="px-6 py-10 max-w-5xl mx-auto bg-gray-800 rounded-xl">
-        <h3 class="text-2xl font-semibold mb-4">Published App: Float Voyage</h3>
-        <p class="text-gray-400 mb-4">
-            mobile game made with the help of Shell and Jasper
-        </p>
-
-        <!-- Embedded YouTube Shorts Video with Fixed Height -->
-        <div class="mb-4 w-full max-w-md mx-auto">
-            <iframe class="w-full h-[600px] rounded-xl shadow-md"
-                    src="https://www.youtube.com/embed/ut0WYFOseaU"
-                    title="Float Voyage Gameplay"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-            </iframe>
+        <div class="hero-links">
+            <a href="#portfolio">Portfolio</a>
+            <a href="#about">About Me</a>
+            <a href="mailto:tyceogames@gmail.com">Contact Me</a>
         </div>
+    </div>
+</section>
 
-        <a href="https://play.google.com/store/apps/details?id=com.FloatVoyagers.FloatVoyage"
-           target="_blank"
-           class="inline-block bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-lg">View on Google Play</a>
-    </section>
+<!-- Portfolio Section -->
+<section class="portfolio" id="portfolio">
+    <h3>Portfolio</h3>
+    <div class="portfolio-divider"></div>
 
-    <!-- Slideshow of Other Work (Manual with Arrows) -->
-    <section class="px-6 py-14 max-w-5xl mx-auto text-center">
-        <h3 class="text-2xl font-semibold mb-6">Other Work</h3>
-
-        <div class="relative w-full max-w-3xl mx-auto h-[500px] rounded-xl overflow-hidden bg-gray-800">
-            <!-- Slides -->
-            <div class="w-full h-full flex items-center justify-center">
-                <img id="slideshow-image"
-                     src="Slide1.png"
-                     alt="Slide"
-                     class="max-h-full max-w-full object-contain rounded-xl transition-opacity duration-500" />
+    <!-- Row 1: Sanctuary Protocol (wide) & Float Voyage -->
+    <div class="portfolio-row">
+        <!-- Project 1: Sanctuary Protocol -->
+        <div class="project-item wide">
+            <div class="project-image-container">
+                <img src="Backrooms.png" alt="Sanctuary Protocol" class="active" data-project="0" data-index="0">
+                <img src="GreenHub.png" alt="Sanctuary Protocol" data-project="0" data-index="1">
+                <img src="Houses.png" alt="Sanctuary Protocol" data-project="0" data-index="2">
+                <img src="RedHell.png" alt="Sanctuary Protocol" data-project="0" data-index="3">
+                <div class="project-nav">
+                    <button class="active" onclick="showImage(0, 0)"></button>
+                    <button onclick="showImage(0, 1)"></button>
+                    <button onclick="showImage(0, 2)"></button>
+                    <button onclick="showImage(0, 3)"></button>
+                </div>
             </div>
-
-            <!-- Left Arrow -->
-            <button onclick="changeSlide(-1)"
-                    class="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-800 bg-opacity-50 hover:bg-opacity-75 text-white px-3 py-2 rounded-r">
-                &#8592;
-            </button>
-
-            <!-- Right Arrow -->
-            <button onclick="changeSlide(1)"
-                    class="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-800 bg-opacity-50 hover:bg-opacity-75 text-white px-3 py-2 rounded-l">
-                &#8594;
-            </button>
+            <div class="project-info">
+                <h4>Sanctuary Protocol</h4>
+                <p>
+                    Funded VR project (Team of 3) | Director & Part Owner
+                </p>
+                <p>
+                    Unity | VR title released on Meta and Steam on TBA 
+                </p>
+                <a href="#" class="project-link">View Project</a>
+            </div>
         </div>
-    </section>
 
-    <script>
-        const slideImages = [
-            "Slide1.png", "Slide2.png", "Slide3.png", "Slide4.png", "Slide5.png", "Slide6.png",
-            "Slide7.png", "Slide8.png", "Slide9.png", "Slide10.png", "Slide11.png", "Slide12.jpg", "Slide13.jpg", "Slide14.jpg", "Slide15.gif"
-        ];
-        let currentSlide = 0;
+        <!-- Project 2: Float Voyage -->
+        <div class="project-item">
+            <div class="project-image-container">
+                <img src="Slide12W.png" alt="Float Voyage" class="active" data-project="1" data-index="0">
+                <img src="Slide13W.png" alt="Float Voyage" data-project="1" data-index="1">
+                <img src="Slide14W.png" alt="Float Voyage" data-project="1" data-index="2">
+                <div class="project-nav">
+                    <button class="active" onclick="showImage(1, 0)"></button>
+                    <button onclick="showImage(1, 1)"></button>
+                    <button onclick="showImage(1, 2)"></button>
+                </div>
+            </div>
+            <div class="project-info">
+                <h4>Float Voyage</h4>
+                <p>
+                    Group Project | Lead Programmer 
+                </p>
+                <p>
+                    Unity | Mobile game published on Google Play
+                </p>
+                <a href="https://play.google.com/store/apps/details?id=com.FloatVoyagers.FloatVoyage" target="_blank" class="project-link">View on Google Play</a>
+            </div>
+        </div>
+    </div>
 
-        function changeSlide(direction) {
-            currentSlide = (currentSlide + direction + slideImages.length) % slideImages.length;
-            document.getElementById("slideshow-image").src = slideImages[currentSlide];
-        }
-    </script>
+    <!-- Row 2: Return The Astronaut & Monster Trappers (wide) -->
+    <div class="portfolio-row">
+        <!-- Project 3: Return The Astronaut -->
+        <div class="project-item">
+            <div class="project-image-container">
+                <img src="Return.png" alt="Return The Astronaut" class="active" data-project="2" data-index="0">
+                <img src="Slide9.png" alt="Return The Astronaut" data-project="2" data-index="1">
+                <img src="Slide2.png" alt="Return The Astronaut" data-project="2" data-index="2">
+                <img src="Slide4.png" alt="Return The Astronaut" data-project="2" data-index="3">
+                <div class="project-nav">
+                    <button class="active" onclick="showImage(2, 0)"></button>
+                    <button onclick="showImage(2, 1)"></button>
+                    <button onclick="showImage(2, 2)"></button>
+                    <button onclick="showImage(2, 3)"></button>
+                </div>
+            </div>
+            <div class="project-info">
+                <h4>Return The Astronaut</h4>
+                <p>
+                    Group Project | Lead Programmer
+                </p>
+                <p>
+                    Unity | PC game published on Itch.io 
+                </p>
+                <a href="https://sleightpengi.itch.io/return-the-astronaut" target="_blank" class="project-link">Play on Itch.io</a>
+            </div>
+        </div>
 
+        <!-- Project 4: Monster Trappers -->
+        <div class="project-item wide">
+            <div class="project-image-container">
+                <img src="MonsterTrappers1.png" alt="Monster Trappers" class="active" data-project="3" data-index="0">
+                <img src="MonsterTrappers2.png" alt="Monster Trappers" data-project="3" data-index="1">
+                <img src="MonsterTrappers3.png" alt="Monster Trappers" data-project="3" data-index="2">
+                <div class="project-nav">
+                    <button class="active" onclick="showImage(3, 0)"></button>
+                    <button onclick="showImage(3, 1)"></button>
+                    <button onclick="showImage(3, 2)"></button>
+                </div>
+            </div>
+            <div class="project-info">
+                <h4>Monster Trappers</h4>
+                <p>
+                    Group Project applying for funding | Network Programmer & AI Programmer
+                </p>
+                <p>
+                    Unity | Online Multiplayer (2-6 players) horror game published TBA
+                </p>
+                <a href="#" class="project-link">View Project</a>
+            </div>
+        </div>
+    </div>
 
-    <!-- Footer -->
-    <footer class="text-center py-10 text-gray-500 text-sm">
-    </footer>
+    <!-- Row 3: Mini Mayhem (wide) & Upcoming Project -->
+    <div class="portfolio-row">
+        <!-- Project 5: Mini Mayhem -->
+        <div class="project-item wide">
+            <div class="project-image-container">
+                <img src="Mini1.png" alt="Mini Mayhem" class="active" data-project="4" data-index="0">
+                <img src="Mini2.png" alt="Mini Mayhem" data-project="4" data-index="1">
+                <img src="Mini3.png" alt="Mini Mayhem" data-project="4" data-index="2">
+                <img src="Mini4W.png" alt="Mini Mayhem" data-project="4" data-index="3">
+                <img src="Mini5.png" alt="Mini Mayhem" data-project="4" data-index="4">
+                <div class="project-nav">
+                    <button class="active" onclick="showImage(4, 0)"></button>
+                    <button onclick="showImage(4, 1)"></button>
+                    <button onclick="showImage(4, 2)"></button>
+                    <button onclick="showImage(4, 3)"></button>
+                    <button onclick="showImage(4, 4)"></button>
+                </div>
+            </div>
+            <div class="project-info">
+                <h4>Mini Mayhem</h4>
+                <p>
+                    Capstone Project (group) | Lead Programmer (Networking, VR Systems, Gameplay Programming) 
+                </p>
+                <p>
+                    Unity | Online Multiplayer (2-24 players) VR party game 
+                </p>
+                <a href="#" class="project-link">View Project</a>
+            </div>
+        </div>
+
+                    <!-- Project 6: Placeholder -->
+            <div class="project-item">
+                <div class="project-placeholder">
+                    <h4>More to be added soon</h4>
+                </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- About Me Section -->
+<section class="about" id="about">
+    <div class="about-container">
+        <div class="about-image">
+            <img src="Me.png" alt="Thomas Smith" />
+        </div>
+        <div class="about-content">
+            <h3>About Me</h3>
+            <p>
+                Hi! My name is Thomas Smith. I'm a Game Developer here in Brisbane, Australia that specialises in Unity. 
+                I'm studying at SAE University College for a Batchelor Of Game Development (Programming).
+            </p>
+            <p>
+                I have experience developing for desktop, mobile, XR devices, and web environments using Unity and C#. My Focus has been on Networking and XR/VR Systems with my Capstone Project being a 2-24 player VR title which I developed the systems for (wayyyyy too many people to try and playtest at once for VR oof).
+            </p>
+            <p>
+                Throughout my studies and career, I've had the opportunity to work on diverse projects both as a team member and as a project leader. I'm leading production of Sanctuary Protocol, 
+                a funded VR project here in Brisbane, where I'm managing the development pipeline and working with our small team to release on Meta and Steam. 
+            </p>
+            <div class="about-buttons">
+                <a href="resume.pdf" target="_blank" class="about-button">Resume</a>
+                <a href="mailto:tyceogames@gmail.com" class="about-button">Contact Me</a>
+                <a href="https://github.com/tyceo" target="_blank" class="about-button">GitHub</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2025 Tyceo Pty Ltd. All rights reserved.</p>
+</footer>
+
+<script>
+    function showImage(projectIndex, imageIndex) {
+        // Get all images and buttons for this project
+        const images = document.querySelectorAll(`img[data-project="${projectIndex}"]`);
+        const buttons = document.querySelectorAll(`.portfolio-row:nth-of-type(${Math.floor(projectIndex / 2) + 1}) .project-item:nth-of-type(${(projectIndex % 2) + 1}) .project-nav button`);
+
+        // Remove active class from all images and buttons in this project
+        images.forEach(img => img.classList.remove('active'));
+        buttons.forEach(btn => btn.classList.remove('active'));
+
+        // Add active class to selected image and button
+        images[imageIndex].classList.add('active');
+        buttons[imageIndex].classList.add('active');
+    }
+</script>
 </body>
 </html>
